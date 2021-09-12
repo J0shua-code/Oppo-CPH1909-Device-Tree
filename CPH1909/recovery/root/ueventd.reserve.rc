@@ -1,0 +1,10 @@
+subsystem adf
+	devname uevent_devname
+
+#Runsheng.Pei@PSW.AD.Storage.ReservePartition.1207580, 2018/10/17, Add for new reserve partition
+
+/dev/block/bootdevice/by-name/opporeserve1               0660   system     system
+/dev/block/sdf6   0660   system     system
+#Xuefeng.Peng@PSW.AD.Storage.ReservePartition.1207580, 2018/10/17, Add for new reserve partition
+/dev/block/mmcblk0p4 0660 system system
+
