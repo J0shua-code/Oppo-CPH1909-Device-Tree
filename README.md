@@ -1,8 +1,10 @@
 ### Device tree for Oppo A5S Codename ("CPH1909")
 
-Kernel source: "https://github.com/oppo-source/A5S-8.1-kernel-source"
-==================================
-## Device specifications
+Kernel source at https://github.com/oppo-source/A5S-8.1-kernel-source
+
+<hr />
+
+### Device specifications
 
 | Device                  |         Oppo A5S                                              |
 | ----------------------: | :------------------------------------------------------------ |
