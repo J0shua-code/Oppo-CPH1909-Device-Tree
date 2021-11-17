@@ -1,12 +1,12 @@
 on init
     mkdir /mnt/vendor/persist
     mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist rw
+    start hwservicemanager
 
 on fs
     start mobicore
     start gatekeeper-1-0
     start keymaster-3-0
-    start hwservicemanager
 
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
     install_keyring
@@ -15,6 +15,13 @@ on property:twrp.all.users.decrypted=true
     stop mobicore
     stop gatekeeper-1-0
     stop keymaster-3-0
+
+service hwservicemanager /sbin/hwservicemanager
+    user root
+    group root
+    onrestart setprop hwservicemanager.ready false
+    disabled
+    seclabel u:r:recovery:s0
 
 service keystore_auth /sbin/keystore_auth
     oneshot
