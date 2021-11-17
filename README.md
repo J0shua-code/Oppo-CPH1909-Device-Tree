@@ -1,4 +1,4 @@
-# Device tree for Oppo A5S Codename ("CPH1909")
+### Device tree for Oppo A5S Codename ("CPH1909")
 
 Kernel source: "https://github.com/oppo-source/A5S-8.1-kernel-source"
 ==================================
@@ -15,5 +15,3 @@ Kernel source: "https://github.com/oppo-source/A5S-8.1-kernel-source"
 | Battery                 | 4230 mAh, Li-Polymer                                          |
 | Dimensions              | 74.3 mm x 156.7 mm x 8.8 mm                                   |
 | Display                 | 6.2 in, IPS, 720 x 1520 pixels, 24 bit                        |
-
-

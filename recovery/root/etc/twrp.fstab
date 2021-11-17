@@ -1,0 +1,26 @@
+#<mount_point>  <type>   <device>                                           <flags>
+/system          ext4    /dev/block/platform/bootdevice/by-name/system
+/vendor          ext4    /dev/block/platform/bootdevice/by-name/vendor
+/system_image    emmc    /dev/block/platform/bootdevice/by-name/system
+/vendor_image    emmc    /dev/block/platform/bootdevice/by-name/vendor
+/boot            emmc    /dev/block/platform/bootdevice/by-name/boot
+/recovery        emmc    /dev/block/platform/bootdevice/by-name/recovery
+/cache           ext4    /dev/block/platform/bootdevice/by-name/cache         
+/data            ext4    /dev/block/platform/bootdevice/by-name/userdata    flags=forceencrypt=/dev/block/platform/bootdevice/by-name/metadata
+/misc            emmc    /dev/block/platform/bootdevice/by-name/para
+
+#Extra Stuff
+/persistent      emmc    /dev/block/platform/bootdevice/by-name/frp         flags=display="frp";backup
+/proinfo         emmc    /dev/block/platform/bootdevice/by-name/proinfo
+/nvram           emmc    /dev/block/platform/bootdevice/by-name/nvram       flags=backup;flashimg
+/nvcfg           ext4    /dev/block/platform/bootdevice/by-name/nvcfg
+/nvdata          ext4    /dev/block/platform/bootdevice/by-name/nvdata
+/protect_f       ext4    /dev/block/platform/bootdevice/by-name/protect1
+/protect_s       ext4    /dev/block/platform/bootdevice/by-name/protect2
+/bootloader      emmc    /dev/block/platform/bootdevice/by-name/lk          flags=display="LK";backup;flashimg
+/bootloader2     emmc    /dev/block/platform/bootdevice/by-name/lk2
+/logo            emmc    /dev/block/platform/bootdevice/by-name/logo
+
+#External_storage
+/external_sd     auto    /devices/platform/externdevice*                    flags=voldmanaged=sdcard1:auto
+/usb-otg 	    auto    /devices/platform/mt_usb*                          flags=voldmanaged=usbotg:auto;storage;wipeingui;removable

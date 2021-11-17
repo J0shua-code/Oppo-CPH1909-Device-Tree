@@ -1,0 +1,54 @@
+on init
+    mkdir /mnt/vendor/persist
+    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist rw
+
+on fs
+    start mobicore
+    start gatekeeper-1-0
+    start keymaster-3-0
+    start hwservicemanager
+
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
+on property:twrp.all.users.decrypted=true
+    stop mobicore
+    stop gatekeeper-1-0
+    stop keymaster-3-0
+
+service keystore_auth /sbin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+# keystore is started and stopped on demand by TWRP
+service keystore /sbin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc log
+    disabled
+    seclabel u:r:recovery:s0
+
+service mobicore /vendor/bin/mcDriverDaemon --P1 /mnt/vendor/persist -r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/05120000000000000000000000000000.drbin -r /vendor/app/mcRegistry/070b0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/020b0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/05070000000000000000000000000000.drbin -r /vendor/app/mcRegistry/030b0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/030c0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/07070000000000000000000000000000.drbin  -r /vendor/app/mcRegistry/5020170115e016302017012521300000.drbin -r /vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin -r /vendor/app/mcRegistry/030d0000000000000000000000000000.drbin -r /vendor/app/mcRegistry/09070000000000000000000000000000.drbin
+    user root
+    group system
+    class core
+    oneshot
+    seclabel u:r:mobicore:s0
+
+service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service keymaster-3-0 /vendor/bin/hw/android.hardware.keymaster@3.0-service
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
